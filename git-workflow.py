@@ -92,7 +92,7 @@ def get_statistics(text):
     node_totals = df['command'].value_counts()
     close_pairs = pairs[pairs.dist == 1]
     pair_counts = close_pairs.groupby(['from', 'to']).aggregate(len).rename(columns= {'dist': 'count'})
-    pair_counts = pair_counts.sort('count', ascending=False)
+    pair_counts = pair_counts.sort_values('count', ascending=False)
     return pair_counts, node_totals
 
 # https://gist.github.com/mwhite/7509467
