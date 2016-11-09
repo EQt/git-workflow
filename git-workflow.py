@@ -6,6 +6,7 @@
 
 import pandas as pd
 import networkx as nx
+import networkx.drawing.nx_agraph as nxd
 import pygraphviz as pgv
 import json
 import tempfile
@@ -38,7 +39,7 @@ def dot_draw(G, prog="dot", tmp_dir="/tmp"):
     # Hackiest code :)
     tmp_dot = tempfile.mktemp(dir=tmp_dir, suffix=".dot")
     tmp_image = tempfile.mktemp(dir=tmp_dir, suffix=".svg")
-    nx.write_dot(G, tmp_dot)
+    nxd.write_dot(G, tmp_dot)
     dot_graph = pgv.AGraph(tmp_dot)
     dot_graph.draw(tmp_image, prog=prog)
     with open(tmp_image) as f:
@@ -145,4 +146,4 @@ if __name__ == "__main__":
             if len(parts) >= 3 and parts[2].find('|') < 0:
                 history.append("%s %s" % (parts[0], parts[2]))
 
-    print create_svg('\n'.join(history))
+    print(create_svg('\n'.join(history)))
